@@ -12,14 +12,10 @@ namespace WindowsFormsBattleship
 {
 	public partial class FormBattleship : Form
 	{
-		Graphics g;
-		battleship ship;
-
+		private IShip ship;
 		public FormBattleship()
 		{
 			InitializeComponent();
-			g = CreateGraphics();
-			ship = new battleship();
 		}
 
 		private void Draw()
@@ -29,12 +25,21 @@ namespace WindowsFormsBattleship
 			ship.DrawShip(gr);
 			pictureBoxShip.Image = bmp;
 		}
+		// Создание корабля
+		private void buttonShipCreate_Click(object sender, EventArgs e)
+		{
+			Random rnd = new Random();
+			ship = new Ship(rnd.Next(200, 300), rnd.Next(1000, 2000), Color.Black);
+			ship.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxShip.Width,
+		   pictureBoxShip.Height);
+			Draw();
+		}
 
+		// Создание линкора
 		private void buttonCreate_Click(object sender, EventArgs e)
 		{
 			Random rnd = new Random();
-			ship = new battleship();
-			ship.Init(rnd.Next(200, 300), rnd.Next(1000, 2000), Color.Black,
+			ship = new battleship(rnd.Next(200, 300), rnd.Next(1000, 2000), Color.Black,
 		   Color.DarkOliveGreen, true, true); ship.SetPosition(rnd.Next(10, 100),
 		   rnd.Next(10, 100), pictureBoxShip.Width, pictureBoxShip.Height);
 			Draw();
@@ -74,5 +79,5 @@ namespace WindowsFormsBattleship
         }
 
 
-    }
+	}
 }
