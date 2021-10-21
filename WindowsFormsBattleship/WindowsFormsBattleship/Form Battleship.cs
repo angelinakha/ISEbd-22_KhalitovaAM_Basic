@@ -18,13 +18,21 @@ namespace WindowsFormsBattleship
 			InitializeComponent();
 		}
 
+		// Передача машины на форму
+		public void SetCar(IShip ship)
+		{
+			this.ship = ship;
+			Draw();
+		}
+
 		private void Draw()
 		{
 			Bitmap bmp = new Bitmap(pictureBoxShip.Width, pictureBoxShip.Height);
 			Graphics gr = Graphics.FromImage(bmp);
-			ship.DrawShip(gr);
+			ship?.DrawShip(gr);
 			pictureBoxShip.Image = bmp;
 		}
+
 		// Создание корабля
 		private void buttonShipCreate_Click(object sender, EventArgs e)
 		{
@@ -39,7 +47,7 @@ namespace WindowsFormsBattleship
 		private void buttonCreate_Click(object sender, EventArgs e)
 		{
 			Random rnd = new Random();
-			ship = new battleship(rnd.Next(200, 300), rnd.Next(1000, 2000), Color.Black,
+			ship = new Battleship(rnd.Next(200, 300), rnd.Next(1000, 2000), Color.Black,
 		   Color.DarkOliveGreen, true, true); ship.SetPosition(rnd.Next(10, 100),
 		   rnd.Next(10, 100), pictureBoxShip.Width, pictureBoxShip.Height);
 			Draw();
@@ -52,32 +60,21 @@ namespace WindowsFormsBattleship
 			switch (name)
 			{
 				case "buttonUp":
-					ship.MoveTransport(Direction.Up);
+					ship?.MoveTransport(Direction.Up);
 					break;
 				case "buttonDown":
-					ship.MoveTransport(Direction.Down);
+					ship?.MoveTransport(Direction.Down);
 					break;
 				case "buttonLeft":
-					ship.MoveTransport(Direction.Left);
+					ship?.MoveTransport(Direction.Left);
 					break;
 				case "buttonRight":
-					ship.MoveTransport(Direction.Right);
+					ship?.MoveTransport(Direction.Right);
 					break;
 			}
 			Draw();
 
 		}
-
-		private void pictureBox1_Click(object sender, EventArgs e)
-		{
-
-		}
-
-        private void FormBattleship_Load(object sender, EventArgs e)
-        {
-
-        }
-
 
 	}
 }

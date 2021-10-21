@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace WindowsFormsBattleship
 {
-    public class battleship : Ship
+    public class Battleship : Ship
     {
         /// Дополнительный цвет
         public Color DopColor { private set; get; }
@@ -16,7 +16,7 @@ namespace WindowsFormsBattleship
         // Признак наличия ракет
         public bool Rocket { private set; get; }
 
-        public battleship(int maxSpeed, float weight, Color mainColor, Color dopColor,
+        public Battleship(int maxSpeed, float weight, Color mainColor, Color dopColor,
         bool rocket, bool cannon) : base (maxSpeed, weight, mainColor, 120, 65)
         {
             DopColor = dopColor;
