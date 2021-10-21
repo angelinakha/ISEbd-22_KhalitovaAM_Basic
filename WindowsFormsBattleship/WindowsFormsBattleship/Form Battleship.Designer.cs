@@ -100,7 +100,6 @@
 			this.pictureBoxShip.Size = new System.Drawing.Size(784, 511);
 			this.pictureBoxShip.TabIndex = 5;
 			this.pictureBoxShip.TabStop = false;
-			this.pictureBoxShip.Click += new System.EventHandler(this.pictureBox1_Click);
 			// 
 			// button2
 			// 
@@ -127,7 +126,6 @@
 			this.Name = "FormBattleship";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Линкор";
-			this.Load += new System.EventHandler(this.FormBattleship_Load);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxShip)).EndInit();
 			this.ResumeLayout(false);
 
