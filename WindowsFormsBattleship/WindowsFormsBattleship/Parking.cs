@@ -7,10 +7,12 @@ using System.Drawing;
 
 namespace WindowsFormsBattleship
 {
-	public class Parking<T> where T: class, IShip
+	public class Parking<T> where T : class, IShip
 	{
-		/// Массив объектов, которые храним
-		private readonly T[] _places;
+		/// Список объектов, которые храним
+		private readonly List<T> _places;
+		/// Максимальное количество мест на парковке
+		private readonly int _maxCount;
 		/// Ширина окна отрисовки
 		private readonly int pictureWidth;
 		/// Высота окна отрисовки
@@ -24,45 +26,41 @@ namespace WindowsFormsBattleship
 		{
 			int width = picWidth / _placeSizeWidth;
 			int height = picHeight / _placeSizeHeight;
-			_places = new T[width * height];
+			_maxCount = width * height;
+			_places = new List<T>();
 			pictureWidth = picWidth;
 			pictureHeight = picHeight;
 		}
 
-		public static int operator +(Parking<T> p, T ship)
+		public static bool operator +(Parking<T> p, T ship)
 		{
-			int width = p.pictureWidth / p._placeSizeWidth;
-			for (int i = 0; i < p._places.Length; i++)
+			if (p._places.Count >= p._maxCount)
 			{
-				if (p._places[i] == null)
-				{
-					p._places[i] = ship;
-					ship.SetPosition(i % width * p._placeSizeWidth + 10,
-					i / width * p._placeSizeHeight + 20, p.pictureWidth, p.pictureHeight);
-					return i;
-				}
+				return false;
 			}
-			return -1;
+			p._places.Add(ship);
+			return true;
 		}
 
 		public static T operator -(Parking<T> p, int index)
 		{
-			if ((index < p._places.Length) && (index >= 0))
+			if ((index < -1) || (index >= p._places.Count))
 			{
-				T ship = p._places[index];
-				p._places[index] = null;
-				return ship;
+				return null;
 			}
-			return null;
+			T ship = p._places[index];
+			p._places.RemoveAt(index);
+			return ship;
 		}
 
 		//Метод отрисовки доков
 		public void Draw(Graphics g)
 		{
 			DrawMarking(g);
-			for (int i = 0; i < _places.Length; i++)
+			for (int i = 0; i < _places.Count; i++)
 			{
-				_places[i]?.DrawShip(g);
+				_places[i].SetPosition(5 + i % 5 * _placeSizeWidth + 5, i / 5 * _placeSizeHeight + 15, pictureWidth, pictureHeight);
+				_places[i].DrawShip(g);
 			}
 		}
 
@@ -71,7 +69,7 @@ namespace WindowsFormsBattleship
 		{
 			Pen pen = new Pen(Color.Black, 3);
 			for (int i = 0; i < pictureWidth / _placeSizeWidth; i++)
-	    {
+			{
 				for (int j = 0; j < pictureHeight / _placeSizeHeight + 1; ++j)
 				{//линия разметки места
 					g.DrawLine(pen, i * _placeSizeWidth, j * _placeSizeHeight, i *
