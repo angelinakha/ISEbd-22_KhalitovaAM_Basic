@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace WindowsFormsBattleship
 {
-	public partial class FormParking : Form
+	public partial class FormDocks : Form
 	{
-		private readonly ParkingCollection parkingCollection;
+		private readonly DocksCollection parkingCollection;
 
-		public FormParking()
+		public FormDocks()
 		{
 			InitializeComponent();
-			parkingCollection = new ParkingCollection(pictureBox_doc.Width, pictureBox_doc.Height);
+			parkingCollection = new DocksCollection(pictureBox_doc.Width, pictureBox_doc.Height);
 			Draw();
 
 		}

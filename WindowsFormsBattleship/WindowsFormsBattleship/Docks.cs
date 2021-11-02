@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace WindowsFormsBattleship
 {
-	public class Parking<T> where T : class, IShip
+	public class Docks<T> where T : class, IShip
 	{
 		/// Список объектов, которые храним
 		private readonly List<T> _places;
@@ -22,7 +22,7 @@ namespace WindowsFormsBattleship
 		/// Размер парковочного места (высота)
 		private readonly int _placeSizeHeight = 90;
 
-		public Parking(int picWidth, int picHeight)
+		public Docks(int picWidth, int picHeight)
 		{
 			int width = picWidth / _placeSizeWidth;
 			int height = picHeight / _placeSizeHeight;
@@ -32,7 +32,7 @@ namespace WindowsFormsBattleship
 			pictureHeight = picHeight;
 		}
 
-		public static bool operator +(Parking<T> p, T ship)
+		public static bool operator +(Docks<T> p, T ship)
 		{
 			if (p._places.Count >= p._maxCount)
 			{
@@ -42,7 +42,7 @@ namespace WindowsFormsBattleship
 			return true;
 		}
 
-		public static T operator -(Parking<T> p, int index)
+		public static T operator -(Docks<T> p, int index)
 		{
 			if ((index < -1) || (index >= p._places.Count))
 			{

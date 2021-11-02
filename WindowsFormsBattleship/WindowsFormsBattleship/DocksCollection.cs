@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsBattleship
 {
-    public class ParkingCollection
+    public class DocksCollection
     {
         // Словарь (хранилище) с парковками
-        readonly Dictionary<string, Parking<Vehicle>> parkingStages;
+        readonly Dictionary<string, Docks<Vehicle>> parkingStages;
         // Возвращение списка названий праковок
         public List<string> Keys => parkingStages.Keys.ToList();
         // Ширина окна отрисовки
@@ -17,9 +17,9 @@ namespace WindowsFormsBattleship
         // Высота окна отрисовки
         private readonly int pictureHeight;
         // Конструктор
-        public ParkingCollection(int pictureWidth, int pictureHeight)
+        public DocksCollection(int pictureWidth, int pictureHeight)
         {
-            parkingStages = new Dictionary<string, Parking<Vehicle>>();
+            parkingStages = new Dictionary<string, Docks<Vehicle>>();
             this.pictureWidth = pictureWidth;
             this.pictureHeight = pictureHeight;
         }
@@ -31,7 +31,7 @@ namespace WindowsFormsBattleship
             {
                 return;
             }
-            parkingStages.Add(name, new Parking<Vehicle>(pictureWidth, pictureHeight));
+            parkingStages.Add(name, new Docks<Vehicle>(pictureWidth, pictureHeight));
         }
 
         /// Удаление парковки
@@ -44,7 +44,7 @@ namespace WindowsFormsBattleship
         }
 
         /// Доступ к парковке
-        public Parking<Vehicle> this[string ind]
+        public Docks<Vehicle> this[string ind]
         {
             get
             {
