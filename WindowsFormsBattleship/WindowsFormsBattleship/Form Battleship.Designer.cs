@@ -138,8 +138,8 @@
 		private System.Windows.Forms.Button buttonRight;
 		private System.Windows.Forms.Button buttonLeft;
 		private System.Windows.Forms.Button buttonDown;
-        private System.Windows.Forms.PictureBox pictureBoxShip;
-        private System.Windows.Forms.Button button2;
-    }
+		private System.Windows.Forms.PictureBox pictureBoxShip;
+		private System.Windows.Forms.Button button2;
+	}
 }
 
