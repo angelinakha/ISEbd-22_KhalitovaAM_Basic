@@ -63,5 +63,9 @@ namespace WindowsFormsBattleship
                 g.FillRectangle(dopBrush, _startPosX + 17, _startPosY + 40, 23, 5);
             }
         }
+        public void SetDopColor(Color color)
+        {
+            DopColor = color;
+        }
     }
 }

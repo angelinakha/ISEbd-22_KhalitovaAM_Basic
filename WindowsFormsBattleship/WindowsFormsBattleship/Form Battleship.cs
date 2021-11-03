@@ -48,8 +48,9 @@ namespace WindowsFormsBattleship
 		{
 			Random rnd = new Random();
 			ship = new Battleship(rnd.Next(200, 300), rnd.Next(1000, 2000), Color.Black,
-		   Color.DarkOliveGreen, true, true); ship.SetPosition(rnd.Next(10, 100),
-		   rnd.Next(10, 100), pictureBoxShip.Width, pictureBoxShip.Height);
+		   Color.DarkOliveGreen, true, true); 
+			ship.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), 
+				pictureBoxShip.Width, pictureBoxShip.Height);
 			Draw();
 		}
 
