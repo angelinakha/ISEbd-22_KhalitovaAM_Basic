@@ -54,51 +54,26 @@ namespace WindowsFormsBattleship
 			}
 		}
 
-		private void button_parkShip_Click(object sender, EventArgs e)
+		private void button_AddShip_Click(object sender, EventArgs e)
 		{
-			if (listBox_listDoc.SelectedIndex > -1)
+			var formShipConfig = new FormShipConfig();
+			formShipConfig.AddEvent(AddShip);
+			formShipConfig.Show();
+		}
+		private void AddShip(Vehicle ship)
+		{
+			if (ship != null && listBox_listDoc.SelectedIndex > -1)
 			{
-				ColorDialog dialog = new ColorDialog();
-				if (dialog.ShowDialog() == DialogResult.OK)
+				if ((parkingCollection[listBox_listDoc.SelectedItem.ToString()]) + ship)
 				{
-					var ship = new Ship(100, 1000, dialog.Color);
-					if (parkingCollection[listBox_listDoc.SelectedItem.ToString()] + ship)
-					{
-						Draw();
-					}
-					else
-					{
-						MessageBox.Show("Доки переполнены");
-					}
+					Draw();
+				}
+				else
+				{
+					MessageBox.Show("Автобус не удалось поставить");
 				}
 			}
 		}
-
-		private void button_parkBShip_Click(object sender, EventArgs e)
-		{
-			if (listBox_listDoc.SelectedIndex > -1)
-			{
-				ColorDialog dialog = new ColorDialog();
-				if (dialog.ShowDialog() == DialogResult.OK)
-				{
-					ColorDialog dialogDop = new ColorDialog();
-					if (dialogDop.ShowDialog() == DialogResult.OK)
-					{
-						var ship = new Battleship(100, 1000, dialog.Color, dialogDop.Color,
-					   true, true);
-						if (parkingCollection[listBox_listDoc.SelectedItem.ToString()] + ship)
-						{
-							Draw();
-						}
-						else
-						{
-							MessageBox.Show("Доки переполнены");
-						}
-					}
-				}
-			}
-		}
-
 		private void button_extract_Click(object sender, EventArgs e)
 		{
 			if (listBox_listDoc.SelectedIndex > -1 && maskedTextBox_place.Text != "")
