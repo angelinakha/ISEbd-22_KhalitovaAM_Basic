@@ -59,7 +59,7 @@ namespace WindowsFormsBattleship
 			DrawMarking(g);
 			for (int i = 0; i < _places.Count; i++)
 			{
-				_places[i].SetPosition(5 + i % 5 * _placeSizeWidth + 5, i / 5 * _placeSizeHeight + 15, pictureWidth, pictureHeight);
+				_places[i].SetPosition(5 + i % 3 * _placeSizeWidth + 5, i / 3 * _placeSizeHeight + 15, pictureWidth, pictureHeight);
 				_places[i].DrawShip(g);
 			}
 		}
@@ -78,6 +78,16 @@ namespace WindowsFormsBattleship
 				g.DrawLine(pen, i * _placeSizeWidth, 0, i * _placeSizeWidth,
 			   (pictureHeight / _placeSizeHeight) * _placeSizeHeight);
 			}
+		}
+
+		// Функция получения элементы из списка
+		public T GetNext(int index)
+		{
+			if (index < 0 || index >= _places.Count)
+			{
+				return null;
+			}
+			return _places[index];
 		}
 	}
 }
