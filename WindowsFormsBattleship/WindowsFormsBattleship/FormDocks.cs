@@ -70,7 +70,7 @@ namespace WindowsFormsBattleship
 				}
 				else
 				{
-					MessageBox.Show("Автобус не удалось поставить");
+					MessageBox.Show("Не получилось припарковать корабль");
 				}
 			}
 		}
@@ -117,6 +117,44 @@ namespace WindowsFormsBattleship
 		private void listBox_listDoc_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			Draw();
+		}
+
+        private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+			if (saveFileDialog_ship.ShowDialog() == DialogResult.OK)
+			{
+				if (parkingCollection.SaveData(saveFileDialog_ship.FileName))
+				{
+					MessageBox.Show("Сохранение прошло успешно", "Результат",
+				   MessageBoxButtons.OK, MessageBoxIcon.Information);
+				}
+				else
+				{
+					MessageBox.Show("Не сохранилось", "Результат",
+				   MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
+			}
+		}
+
+        private void загрузитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			if (openFileDialog_ship.ShowDialog() == DialogResult.OK)
+			{
+				if (parkingCollection.LoadData(openFileDialog_ship.FileName))
+				{
+					MessageBox.Show("Загрузили", "Результат", MessageBoxButtons.OK,
+				   MessageBoxIcon.Information);
+					ReloadLevels();
+					Draw();
+				}
+				else
+				{
+					MessageBox.Show("Не загрузили", "Результат", MessageBoxButtons.OK,
+				   MessageBoxIcon.Error);
+				}
+			}
+
 		}
 	}
 }

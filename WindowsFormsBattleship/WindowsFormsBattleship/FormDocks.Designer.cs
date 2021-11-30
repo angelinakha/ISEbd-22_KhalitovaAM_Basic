@@ -39,22 +39,29 @@
             this.label_parks = new System.Windows.Forms.Label();
             this.button_add = new System.Windows.Forms.Button();
             this.button_del = new System.Windows.Forms.Button();
+            this.menuStrip_ship = new System.Windows.Forms.MenuStrip();
+            this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.загрузитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveFileDialog_ship = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog_ship = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_doc)).BeginInit();
             this.groupBox_extract.SuspendLayout();
+            this.menuStrip_ship.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox_doc
             // 
             this.pictureBox_doc.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.pictureBox_doc.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox_doc.Location = new System.Drawing.Point(0, 30);
             this.pictureBox_doc.Name = "pictureBox_doc";
-            this.pictureBox_doc.Size = new System.Drawing.Size(642, 450);
+            this.pictureBox_doc.Size = new System.Drawing.Size(642, 452);
             this.pictureBox_doc.TabIndex = 0;
             this.pictureBox_doc.TabStop = false;
             // 
             // button_AddShip
             // 
-            this.button_AddShip.Location = new System.Drawing.Point(648, 236);
+            this.button_AddShip.Location = new System.Drawing.Point(648, 258);
             this.button_AddShip.Name = "button_AddShip";
             this.button_AddShip.Size = new System.Drawing.Size(140, 48);
             this.button_AddShip.TabIndex = 1;
@@ -67,7 +74,7 @@
             this.groupBox_extract.Controls.Add(this.button_extract);
             this.groupBox_extract.Controls.Add(this.maskedTextBox_place);
             this.groupBox_extract.Controls.Add(this.label_place);
-            this.groupBox_extract.Location = new System.Drawing.Point(648, 333);
+            this.groupBox_extract.Location = new System.Drawing.Point(648, 355);
             this.groupBox_extract.Name = "groupBox_extract";
             this.groupBox_extract.Size = new System.Drawing.Size(139, 110);
             this.groupBox_extract.TabIndex = 3;
@@ -103,7 +110,7 @@
             // listBox_listDoc
             // 
             this.listBox_listDoc.FormattingEnabled = true;
-            this.listBox_listDoc.Location = new System.Drawing.Point(647, 83);
+            this.listBox_listDoc.Location = new System.Drawing.Point(647, 115);
             this.listBox_listDoc.Name = "listBox_listDoc";
             this.listBox_listDoc.Size = new System.Drawing.Size(140, 69);
             this.listBox_listDoc.TabIndex = 4;
@@ -111,7 +118,7 @@
             // 
             // textBox_parkName
             // 
-            this.textBox_parkName.Location = new System.Drawing.Point(647, 25);
+            this.textBox_parkName.Location = new System.Drawing.Point(647, 57);
             this.textBox_parkName.Name = "textBox_parkName";
             this.textBox_parkName.Size = new System.Drawing.Size(140, 20);
             this.textBox_parkName.TabIndex = 5;
@@ -119,7 +126,7 @@
             // label_parks
             // 
             this.label_parks.AutoSize = true;
-            this.label_parks.Location = new System.Drawing.Point(688, 9);
+            this.label_parks.Location = new System.Drawing.Point(688, 41);
             this.label_parks.Name = "label_parks";
             this.label_parks.Size = new System.Drawing.Size(60, 13);
             this.label_parks.TabIndex = 6;
@@ -127,7 +134,7 @@
             // 
             // button_add
             // 
-            this.button_add.Location = new System.Drawing.Point(647, 51);
+            this.button_add.Location = new System.Drawing.Point(647, 83);
             this.button_add.Name = "button_add";
             this.button_add.Size = new System.Drawing.Size(140, 26);
             this.button_add.TabIndex = 7;
@@ -137,7 +144,7 @@
             // 
             // button_del
             // 
-            this.button_del.Location = new System.Drawing.Point(648, 154);
+            this.button_del.Location = new System.Drawing.Point(648, 186);
             this.button_del.Name = "button_del";
             this.button_del.Size = new System.Drawing.Size(140, 28);
             this.button_del.TabIndex = 8;
@@ -145,24 +152,70 @@
             this.button_del.UseVisualStyleBackColor = true;
             this.button_del.Click += new System.EventHandler(this.button_del_Click);
             // 
+            // menuStrip_ship
+            // 
+            this.menuStrip_ship.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.файлToolStripMenuItem});
+            this.menuStrip_ship.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip_ship.Name = "menuStrip_ship";
+            this.menuStrip_ship.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip_ship.TabIndex = 9;
+            this.menuStrip_ship.Text = "menuStrip1";
+            // 
+            // файлToolStripMenuItem
+            // 
+            this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.сохранитьToolStripMenuItem,
+            this.загрузитьToolStripMenuItem});
+            this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
+            this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.файлToolStripMenuItem.Text = "Файл";
+            // 
+            // сохранитьToolStripMenuItem
+            // 
+            this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.сохранитьToolStripMenuItem.Text = "Сохранить";
+            this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
+            // 
+            // загрузитьToolStripMenuItem
+            // 
+            this.загрузитьToolStripMenuItem.Name = "загрузитьToolStripMenuItem";
+            this.загрузитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.загрузитьToolStripMenuItem.Text = "Загрузить";
+            this.загрузитьToolStripMenuItem.Click += new System.EventHandler(this.загрузитьToolStripMenuItem_Click);
+            // 
+            // saveFileDialog_ship
+            // 
+            this.saveFileDialog_ship.Filter = "txt file | *.txt";
+            // 
+            // openFileDialog_ship
+            // 
+            this.openFileDialog_ship.FileName = "openFileDialog1";
+            this.openFileDialog_ship.Filter = "txt file | *.txt";
+            // 
             // FormDocks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 486);
+            this.Controls.Add(this.label_parks);
+            this.Controls.Add(this.menuStrip_ship);
             this.Controls.Add(this.button_del);
             this.Controls.Add(this.button_add);
-            this.Controls.Add(this.label_parks);
             this.Controls.Add(this.textBox_parkName);
             this.Controls.Add(this.listBox_listDoc);
             this.Controls.Add(this.groupBox_extract);
             this.Controls.Add(this.button_AddShip);
             this.Controls.Add(this.pictureBox_doc);
+            this.MainMenuStrip = this.menuStrip_ship;
             this.Name = "FormDocks";
             this.Text = "Доки";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_doc)).EndInit();
             this.groupBox_extract.ResumeLayout(false);
             this.groupBox_extract.PerformLayout();
+            this.menuStrip_ship.ResumeLayout(false);
+            this.menuStrip_ship.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -181,5 +234,11 @@
         private System.Windows.Forms.Label label_parks;
         private System.Windows.Forms.Button button_add;
         private System.Windows.Forms.Button button_del;
+        private System.Windows.Forms.MenuStrip menuStrip_ship;
+        private System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem сохранитьToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem загрузитьToolStripMenuItem;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog_ship;
+        private System.Windows.Forms.OpenFileDialog openFileDialog_ship;
     }
 }

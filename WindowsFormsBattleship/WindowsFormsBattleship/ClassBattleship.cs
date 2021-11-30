@@ -24,6 +24,20 @@ namespace WindowsFormsBattleship
             Cannon = cannon;
         }
 
+        public Battleship(string info) : base(info)
+        {
+            string[] strs = info.Split(separator);
+            if (strs.Length == 6)
+            {
+                MaxSpeed = Convert.ToInt32(strs[0]);
+                Weight = Convert.ToInt32(strs[1]);
+                MainColor = Color.FromName(strs[2]);
+                DopColor = Color.FromName(strs[3]);
+                Rocket = Convert.ToBoolean(strs[4]);
+                Cannon = Convert.ToBoolean(strs[5]);
+            }
+        }
+
         public override void DrawShip(Graphics g)
         {
             Pen pen = new Pen(Color.Black);
@@ -63,9 +77,15 @@ namespace WindowsFormsBattleship
                 g.FillRectangle(dopBrush, _startPosX + 17, _startPosY + 40, 23, 5);
             }
         }
+        // Смена основного цвета
         public void SetDopColor(Color color)
         {
             DopColor = color;
+        }
+        public override string ToString()
+        {
+            return
+           $"{base.ToString()}{separator}{DopColor.Name}{separator}{Rocket}{separator}{Cannon}";
         }
     }
 }
