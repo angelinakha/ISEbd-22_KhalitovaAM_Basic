@@ -19,7 +19,7 @@ namespace WindowsFormsBattleship
 		}
 
 		// Передача машины на форму
-		public void SetCar(IShip ship)
+		public void SetShip(IShip ship)
 		{
 			this.ship = ship;
 			Draw();
