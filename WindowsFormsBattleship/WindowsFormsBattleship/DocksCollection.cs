@@ -113,7 +113,6 @@ namespace WindowsFormsBattleship
                 string line = sr.ReadLine();
                 string key = string.Empty;
                 Vehicle ship = null;
-
                 if (line.Contains("DocksCollection"))
                 {
                     //очищаем записи

@@ -70,7 +70,7 @@ namespace WindowsFormsBattleship
 				}
 				else
 				{
-					MessageBox.Show("Автобус не удалось поставить");
+					MessageBox.Show("Не получилось припарковать корабль");
 				}
 			}
 		}
