@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NLog;
 
 namespace WindowsFormsBattleship
 {
@@ -14,12 +15,14 @@ namespace WindowsFormsBattleship
 	{
 		private readonly DocksCollection parkingCollection;
 
+		/// Логгер
+		private readonly Logger logger;
+
 		public FormDocks()
 		{
 			InitializeComponent();
 			parkingCollection = new DocksCollection(pictureBox_doc.Width, pictureBox_doc.Height);
-			Draw();
-
+			logger = LogManager.GetCurrentClassLogger();
 		}
 
 		/// Заполнение listBoxLevels
@@ -64,13 +67,30 @@ namespace WindowsFormsBattleship
 		{
 			if (ship != null && listBox_listDoc.SelectedIndex > -1)
 			{
-				if ((parkingCollection[listBox_listDoc.SelectedItem.ToString()]) + ship)
+				try
 				{
+					if ((parkingCollection[listBox_listDoc.SelectedItem.ToString()]) + ship)
+					{
+						Draw();
+						logger.Info($"Добавлен корабль {ship}");
+					}
+					else
+					{
+						logger.Warn("Корабль не удалось поставить");
+					}
 					Draw();
 				}
-				else
+				catch (DocksOverflowException ex)
 				{
-					MessageBox.Show("Не получилось припарковать корабль");
+					MessageBox.Show(ex.Message, "Переполнение", MessageBoxButtons.OK,
+					MessageBoxIcon.Error);
+					logger.Warn($"{ex.Message} Переполнение");
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(ex.Message, "Неизвестная ошибка",
+					MessageBoxButtons.OK, MessageBoxIcon.Error);
+					logger.Warn($"{ex.Message} Неизвестная ошибка");
 				}
 			}
 		}
@@ -78,15 +98,30 @@ namespace WindowsFormsBattleship
 		{
 			if (listBox_listDoc.SelectedIndex > -1 && maskedTextBox_place.Text != "")
 			{
-
-				var ship = parkingCollection[listBox_listDoc.SelectedItem.ToString()] - Convert.ToInt32(maskedTextBox_place.Text);
-				if (ship != null)
+				try
 				{
-					FormBattleship form = new FormBattleship();
-					form.SetCar(ship);
-					form.ShowDialog();
+					var ship = parkingCollection[listBox_listDoc.SelectedItem.ToString()] - Convert.ToInt32(maskedTextBox_place.Text);
+					if (ship != null)
+					{
+						FormBattleship form = new FormBattleship();
+						form.SetShip(ship);
+						form.ShowDialog();
+						logger.Info($"Изъят корабль {ship} с места {maskedTextBox_place.Text}");
+				    Draw();
+					}
 				}
-				Draw();
+				catch (DocksNotFoundException ex)
+				{
+					MessageBox.Show(ex.Message, "Не найдено", MessageBoxButtons.OK,
+					MessageBoxIcon.Error);
+					logger.Warn($"{ex.Message} Не найдено");
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(ex.Message, "Неизвестная ошибка",
+					MessageBoxButtons.OK, MessageBoxIcon.Error);
+					logger.Warn($"{ex.Message} Неизвестная ошибка");
+				}
 			}
 		}
 
@@ -98,6 +133,7 @@ namespace WindowsFormsBattleship
 			   MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
 			}
+			logger.Info($"Добавили доки {textBox_parkName.Text}");
 			parkingCollection.AddParking(textBox_parkName.Text);
 			ReloadLevels();
 		}
@@ -108,6 +144,7 @@ namespace WindowsFormsBattleship
 			{
 				if (MessageBox.Show($"Удалить парковку { listBox_listDoc.SelectedItem.ToString()}?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
 				{
+					logger.Info($"Удалили парковку {listBox_listDoc.SelectedItem.ToString()}");
 					parkingCollection.DelParking(listBox_listDoc.Text);
 					ReloadLevels();
 				}
@@ -116,6 +153,8 @@ namespace WindowsFormsBattleship
 
 		private void listBox_listDoc_SelectedIndexChanged(object sender, EventArgs e)
 		{
+			logger.Info($"Перешли на доки {listBox_listDoc.SelectedItem.ToString()}");
+
 			Draw();
 		}
 
@@ -124,15 +163,18 @@ namespace WindowsFormsBattleship
 
 			if (saveFileDialog_ship.ShowDialog() == DialogResult.OK)
 			{
-				if (parkingCollection.SaveData(saveFileDialog_ship.FileName))
+				try
 				{
+					parkingCollection.SaveData(saveFileDialog_ship.FileName);
 					MessageBox.Show("Сохранение прошло успешно", "Результат",
-				   MessageBoxButtons.OK, MessageBoxIcon.Information);
+					MessageBoxButtons.OK, MessageBoxIcon.Information);
+					logger.Info("Сохранено в файл " + saveFileDialog_ship.FileName);
 				}
-				else
+				catch (Exception ex)
 				{
-					MessageBox.Show("Не сохранилось", "Результат",
-				   MessageBoxButtons.OK, MessageBoxIcon.Error);
+					MessageBox.Show(ex.Message, "Неизвестная ошибка при сохранении",
+					MessageBoxButtons.OK, MessageBoxIcon.Error);
+					logger.Warn($"{ex.Message} Неизвестная ошибка при сохранении");
 				}
 			}
 		}
@@ -141,17 +183,26 @@ namespace WindowsFormsBattleship
         {
 			if (openFileDialog_ship.ShowDialog() == DialogResult.OK)
 			{
-				if (parkingCollection.LoadData(openFileDialog_ship.FileName))
+				try
 				{
+					parkingCollection.LoadData(openFileDialog_ship.FileName);
 					MessageBox.Show("Загрузили", "Результат", MessageBoxButtons.OK,
-				   MessageBoxIcon.Information);
+					MessageBoxIcon.Information);
+					logger.Info("Загружено из файла " + openFileDialog_ship.FileName);
 					ReloadLevels();
 					Draw();
 				}
-				else
+				catch (DocksOccupiedPlaceException ex)
 				{
-					MessageBox.Show("Не загрузили", "Результат", MessageBoxButtons.OK,
-				   MessageBoxIcon.Error);
+					MessageBox.Show(ex.Message, "Занятое место", MessageBoxButtons.OK,
+					MessageBoxIcon.Error);
+					logger.Warn($"{ex.Message} Занятое место");
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(ex.Message, "Неизвестная ошибка при сохранении",
+					MessageBoxButtons.OK, MessageBoxIcon.Error);
+					logger.Warn($"{ex.Message} Неизвестная ошибка при сохранении");
 				}
 			}
 
