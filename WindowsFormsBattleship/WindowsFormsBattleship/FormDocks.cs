@@ -207,5 +207,16 @@ namespace WindowsFormsBattleship
 			}
 
 		}
+
+        private void buttonSort_Click(object sender, EventArgs e)
+        {
+			if (listBox_listDoc.SelectedIndex > -1)
+			{
+				parkingCollection[listBox_listDoc.SelectedItem.ToString()].Sort();
+				Draw();
+				logger.Info("Сортировка уровней");
+			}
+
+		}
 	}
 }
