@@ -89,7 +89,7 @@ namespace WindowsFormsBattleship
         }
 
         /// <summary>
-        /// Метод интерфейса IEquatable для класса SportCar
+        /// Метод интерфейса IEquatable для класса Battleship
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
