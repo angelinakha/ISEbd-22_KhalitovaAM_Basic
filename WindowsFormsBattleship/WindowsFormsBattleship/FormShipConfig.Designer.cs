@@ -115,9 +115,9 @@
             this.checkBox_rocket.AutoSize = true;
             this.checkBox_rocket.Location = new System.Drawing.Point(166, 84);
             this.checkBox_rocket.Name = "checkBox_rocket";
-            this.checkBox_rocket.Size = new System.Drawing.Size(64, 17);
+            this.checkBox_rocket.Size = new System.Drawing.Size(59, 17);
             this.checkBox_rocket.TabIndex = 5;
-            this.checkBox_rocket.Text = "Ракеты";
+            this.checkBox_rocket.Text = "Пушки";
             this.checkBox_rocket.UseVisualStyleBackColor = true;
             // 
             // checkBox_cannon
@@ -125,9 +125,9 @@
             this.checkBox_cannon.AutoSize = true;
             this.checkBox_cannon.Location = new System.Drawing.Point(166, 46);
             this.checkBox_cannon.Name = "checkBox_cannon";
-            this.checkBox_cannon.Size = new System.Drawing.Size(59, 17);
+            this.checkBox_cannon.Size = new System.Drawing.Size(64, 17);
             this.checkBox_cannon.TabIndex = 4;
-            this.checkBox_cannon.Text = "Пушки";
+            this.checkBox_cannon.Text = "Ракеты";
             this.checkBox_cannon.UseVisualStyleBackColor = true;
             // 
             // numericUpDown_W

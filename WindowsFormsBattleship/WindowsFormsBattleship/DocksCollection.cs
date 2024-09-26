@@ -77,8 +77,7 @@ namespace WindowsFormsBattleship
                 {
                     //Начинаем парковку
                     sw.WriteLine($"Docks{separator}{level.Key}");
-                    IShip ship = null;
-                    for (int i = 0; (ship = level.Value.GetNext(i)) != null; i++)
+                    foreach (IShip ship in level.Value)
                     {
                         if (ship != null)
                         {

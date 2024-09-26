@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DocksAlreadyHaveException.cs" />
     <Compile Include="DocksNotFoundException.cs" />
     <Compile Include="DocksOccupiedPlaceException.cs" />
     <Compile Include="DocksOverflowException.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ship.cs" />
+    <Compile Include="ShipComparer.cs" />
     <Compile Include="Vehicle.cs" />
     <EmbeddedResource Include="Form Battleship.resx">
       <DependentUpon>Form Battleship.cs</DependentUpon>
